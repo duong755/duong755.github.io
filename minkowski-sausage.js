@@ -1,4 +1,4 @@
-(function () {
+function draw () {
     /**
      * @type {HTMLCanvasElement}
      */
@@ -18,4 +18,7 @@
             drawMinkowskiWurst(ctx, [0, h / 2], [w, h / 2], step);
         }, step * 1000);
     }
-})();
+}
+
+draw();
+document.getElementById("replay").addEventListener("click", draw);

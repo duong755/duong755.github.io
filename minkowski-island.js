@@ -1,4 +1,4 @@
-(function () {
+function draw () {
     /**
      * @type {HTMLCanvasElement}
      */
@@ -25,4 +25,7 @@
             drawMinkowskiInsel(ctx, viereck, iteration);
         }, iteration * 1000);
     }
-})();
+}
+
+draw();
+document.getElementById("replay").addEventListener("click", draw);

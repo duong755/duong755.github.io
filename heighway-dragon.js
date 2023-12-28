@@ -1,4 +1,4 @@
-(function () {
+function draw () {
     /**
      * @type {HTMLCanvasElement}
      */
@@ -10,7 +10,7 @@
     const w = width,
         h = width;
     const ctx = canvas.getContext("2d");
-    ctx.lineWidth = 5;
+    ctx.lineWidth = 4;
 
     for (let iteration = 0; iteration <= 20; iteration++) {
         setTimeout(() => {
@@ -18,4 +18,7 @@
             drawHeighwayDrachen(ctx, [w / 5, h / 2], [(4 * w) / 5, h / 2], iteration);
         }, iteration * 1000);
     }
-})();
+}
+
+draw();
+document.getElementById("replay").addEventListener("click", draw);

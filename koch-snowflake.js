@@ -1,4 +1,4 @@
-(function () {
+function draw () {
     /**
      * @type {HTMLCanvasElement}
      */
@@ -28,5 +28,7 @@
             drawKochSnowflake(ctx, triangle, iteration);
         }, iteration * 1000);
     }
-})();
+}
 
+draw();
+document.getElementById("replay").addEventListener("click", draw);

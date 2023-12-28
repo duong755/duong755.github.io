@@ -1,4 +1,4 @@
-(function () {
+function draw () {
     /**
      * @type {HTMLCanvasElement}
      */
@@ -17,6 +17,8 @@
             ctx.clearRect(0, 0, w, h);
             drawKochCurve(ctx, [0, 2 * h /3], [w, 2 * h / 3], iteration);
         }, iteration * 1000);
-    }
-    
-})();
+    }   
+}
+
+draw();
+document.getElementById("replay").addEventListener("click", draw);
