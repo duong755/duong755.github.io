@@ -11,7 +11,6 @@ function draw () {
     canvas.height = h;
 
     const ctx = canvas.getContext("2d");
-    ctx.lineWidth = 2;
 
     for (let iteration = 0; iteration <= 6; iteration++) {
         setTimeout(() => {

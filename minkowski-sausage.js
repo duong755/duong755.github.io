@@ -10,7 +10,6 @@ function draw () {
     const w = width,
         h = width;
     const ctx = canvas.getContext("2d");
-    ctx.lineWidth = 2;
 
     for (let step = 0; step <= 5; step++) {
         setTimeout(() => {
