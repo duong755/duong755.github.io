@@ -56,6 +56,46 @@ function sierpinskiCurve(start, end, iteration) {
 }
 
 /**
+ * 
+ * @param {[Point2D, Point2D, Point2D]} triangle 
+ * @param {number} iteration 
+ */
+function sierpinskiTriangle(triangle, iteration) {
+    /**
+     * 
+     * @param {[Point2D, Point2D, Point2D][][]} result 
+     * @param {number} step
+     * @param {[Point2D, Point2D, Point2D][][]} 
+     */
+    function recur(result, step) {
+        if (step >= iteration) {
+            return result;
+        }
+
+        const last = result[result.length - 1];
+        const smallerTriangles = last.flatMap(function (element) {
+            const [A, B, C] = element;
+            const M_AB = divide(A, B, 0.5);
+            const M_BC = divide(B, C, 0.5);
+            const M_CA = divide(C, A, 0.5);
+
+            /** @type {[Point2D, Point2D, Point2D]} */
+            const first = [A, M_AB, M_CA];
+            /** @type {[Point2D, Point2D, Point2D]} */
+            const second = [M_AB, B, M_BC];
+            /** @type {[Point2D, Point2D, Point2D]} */
+            const third = [M_CA, M_BC, C];
+
+            return [first, second, third];
+        });
+
+        return recur([...result, smallerTriangles], step + 1);
+    }
+
+    return recur([[triangle]], 0);
+}
+
+/**
  *
  * @param {CanvasRenderingContext2D} context
  * @param {[number, string][]} colors
@@ -82,4 +122,25 @@ function drawSierpinskiCurve(context, colors, start, end, step) {
     });
     context.strokeStyle = linearGradient;
     context.stroke();
+}
+
+/**
+ *
+ * @param {CanvasRenderingContext2D} context
+ * @param {[Point2D, Point2D, Point2D]} triangle
+ * @param {number} step
+ */
+function drawSierpinskiTriangle(context, triangle, step) {
+    const listOfListOfTriangles = sierpinskiTriangle(triangle, step);
+    listOfListOfTriangles.forEach(function (listOfTriangles) {
+        listOfTriangles.forEach(function (triangle) {
+            const [A, B, C] = triangle;
+            context.beginPath();
+            context.moveTo(...A);
+            context.lineTo(...B);
+            context.lineTo(...C);
+            context.closePath();
+            context.stroke();
+        });
+    });
 }
