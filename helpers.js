@@ -17,11 +17,11 @@ function distance(point1, point2) {
 /**
  *
  * @param {Point2D} center
- * @param {number} angle In radian
  * @param {Point2D} point
+ * @param {number} angle In radian
  * @returns {Point2D}
  */
-function rotate(center, angle, point) {
+function rotate(center, point, angle) {
     const radius = distance(center, point);
 
     if (radius === 0) {

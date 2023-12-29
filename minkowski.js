@@ -28,11 +28,11 @@ function simpleMinkowski(start, end) {
     const points = [
         start,
         oneFourth,
-        rotate(oneFourth, -Math.PI / 2, half),
-        rotate(half, Math.PI / 2, oneFourth),
+        rotate(oneFourth, half,  -Math.PI / 2),
+        rotate(half, oneFourth, Math.PI / 2),
         half,
-        rotate(half, Math.PI / 2, threeFourth),
-        rotate(threeFourth, -Math.PI / 2, half),
+        rotate(half, threeFourth, Math.PI / 2),
+        rotate(threeFourth, half, -Math.PI / 2),
         threeFourth,
         end,
     ];

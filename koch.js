@@ -20,7 +20,7 @@ function simpleKoch(start, end) {
     const points = [
         start,
         oneThird,
-        rotate(oneThird, -Math.PI / 3, twoThird),
+        rotate(oneThird, twoThird, -Math.PI / 3),
         twoThird,
         end,
     ];

@@ -6,7 +6,7 @@
  * @returns {Point2D[]}
  */
 function simpleSierpinski(start, end, flip = false) {
-    const otherVertice = rotate(start, flip ? -Math.PI / 3 : Math.PI / 3, end);
+    const otherVertice = rotate(start, end, flip ? -Math.PI / 3 : Math.PI / 3);
 
     return [start, divide(start, otherVertice, 0.5), divide(otherVertice, end, 0.5), end];
 }
@@ -17,7 +17,7 @@ function simpleSierpinski(start, end, flip = false) {
  * @param {Point2D} end
  * @param {number} iteration
  */
-function sierpinski(start, end, iteration) {
+function sierpinskiCurve(start, end, iteration) {
     /**
      *
      * @param {Point2D[]} result
@@ -65,7 +65,7 @@ function sierpinski(start, end, iteration) {
  */
 function drawSierpinskiCurve(context, colors, start, end, step) {
     context.beginPath();
-    const points = sierpinski(start, end, step);
+    const points = sierpinskiCurve(start, end, step);
     const linearGradient = context.createLinearGradient(
         points[0][0],
         points[0][1],

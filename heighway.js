@@ -13,7 +13,7 @@ function simpleHeighway(start, end) {
      */
     const midpoint = [(x1 + x2) / 2, (y1 + y2) / 2];
 
-    return [start, rotate(midpoint, -Math.PI / 2, start), end];
+    return [start, rotate(midpoint, start, -Math.PI / 2), end];
 }
 
 /**
