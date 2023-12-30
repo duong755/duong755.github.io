@@ -3,7 +3,7 @@
         /**
          * @type {HTMLCanvasElement}
          */
-        const canvas = document.getElementById("sierpinski-curve");
+        const canvas = document.getElementById("sierpinski-arrowhead-curve");
         const { width } = canvas.parentElement.getBoundingClientRect();
         canvas.width = width;
         canvas.height = width;
@@ -16,11 +16,16 @@
         for (let step = 0; step <= 12; step++) {
             setTimeout(() => {
                 ctx.clearRect(0, 0, w, h);
-                drawSierpinskiCurve(
+                drawSierpinskiArrowheadCurve(
                     ctx,
                     [
                         [0, "red"],
-                        [1, "blue"],
+                        [1/6, "orange"],
+                        [2/6, "yellow"],
+                        [3/6, "lime"],
+                        [4/6, "lightblue"],
+                        [5/6, "blue"],
+                        [1, "purple"],
                     ],
                     [0, h],
                     [w, h],
