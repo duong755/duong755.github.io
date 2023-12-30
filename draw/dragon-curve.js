@@ -2,7 +2,7 @@ function draw () {
     /**
      * @type {HTMLCanvasElement}
      */
-    const canvas = document.getElementById("heighway-drachen");
+    const canvas = document.getElementById("dragon");
     const { width } = canvas.parentElement.getBoundingClientRect();
     const w = width,
         h = width * 3/4;
@@ -15,7 +15,7 @@ function draw () {
         setTimeout(() => {
             ctx.clearRect(0, 0, w, h);
             const t = 1/5;
-            drawHeighwayDrachen(ctx, [w * t, h / 3], [w * (1 - t), h / 3], iteration);
+            drawDragonCurve(ctx, [[0, "red"], [0.5, "blue"], [1, "violet"]], [w * t, h / 3], [w * (1 - t), h / 3], iteration);
         }, iteration * 1000);
     }
 }

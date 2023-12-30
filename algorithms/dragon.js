@@ -4,7 +4,7 @@
  * @param {Point2D} end
  * @returns {Point2D[]}
  */
-function simpleHeighway(start, end) {
+function simpleDragon(start, end) {
     const [x1, y1] = start;
     const [x2, y2] = end;
 
@@ -23,8 +23,7 @@ function simpleHeighway(start, end) {
  * @param {number} step
  * @returns {Point2D[]}
  */
-function heighway(start, end, step) {
-    console.assert(step >= 0);
+function dragonCurve(start, end, step) {
     /**
      *
      * @param {Point2D[]} result
@@ -36,10 +35,10 @@ function heighway(start, end, step) {
 
         const segments = result.flatMap((point, index, thisPath) => {
             if (index === thisPath.length - 1) return [];
-            if (index === 0) return simpleHeighway(point, thisPath[index + 1]);
+            if (index === 0) return simpleDragon(point, thisPath[index + 1]);
             if (index % 2 === 0)
-                return simpleHeighway(point, thisPath[index + 1]).slice(1);
-            return simpleHeighway(thisPath[index + 1], point)
+                return simpleDragon(point, thisPath[index + 1]).slice(1);
+            return simpleDragon(thisPath[index + 1], point)
                 .reverse()
                 .slice(1);
         });
@@ -53,22 +52,21 @@ function heighway(start, end, step) {
 /**
  *
  * @param {CanvasRenderingContext2D} context
+ * @param {[number, string][]} colors
  * @param {Point2D} start
  * @param {Point2D} end
  * @param {number} step
  */
-function drawHeighwayDrachen(context, start, end, step) {
+function drawDragonCurve(context, colors, start, end, step) {
     context.beginPath();
-    const points = heighway(start, end, step);
+    const points = dragonCurve(start, end, step);
     const linearGradient = context.createLinearGradient(
         points[0][0],
         points[0][1],
         points[points.length - 1][0],
         points[points.length - 1][1]
     );
-    linearGradient.addColorStop(0, "red");
-    linearGradient.addColorStop(0.5, "blue");
-    linearGradient.addColorStop(1, "purple");
+    colors.forEach(([key, val]) => linearGradient.addColorStop(key, val));
 
     points.forEach((point, index) => {
         if (index === 0) {
