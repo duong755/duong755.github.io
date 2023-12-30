@@ -11,6 +11,7 @@ function draw () {
     canvas.height = h;
 
     const ctx = canvas.getContext("2d");
+    ctx.strokeStyle = "#FFFFFF";
 
     for (let iteration = 0; iteration <= 6; iteration++) {
         setTimeout(() => {

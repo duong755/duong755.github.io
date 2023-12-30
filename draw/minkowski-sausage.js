@@ -4,12 +4,13 @@ function draw () {
      */
     const canvas = document.getElementById("minkowski-wurst");
     const { width } = canvas.parentElement.getBoundingClientRect();
-    canvas.width = width;
-    canvas.height = width;
-
     const w = width,
         h = width;
+    canvas.width = w;
+    canvas.height = h;
+
     const ctx = canvas.getContext("2d");
+    ctx.strokeStyle = "#FFFFFF";
 
     for (let step = 0; step <= 5; step++) {
         setTimeout(() => {

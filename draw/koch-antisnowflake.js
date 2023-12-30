@@ -8,6 +8,7 @@ function draw () {
     canvas.height = 1.5 * width;
 
     const ctx = canvas.getContext("2d");
+    ctx.strokeStyle = "#FFFFFF";
 
     const w = width,
         h = 1.5 * width;

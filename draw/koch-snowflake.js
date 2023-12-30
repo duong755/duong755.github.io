@@ -4,13 +4,13 @@ function draw () {
      */
     const canvas = document.getElementById("koch-snowflake");
     const { width } = canvas.parentElement.getBoundingClientRect();
-    canvas.width = width;
-    canvas.height = 1.5 * width;
-
-    const ctx = canvas.getContext("2d");
-
     const w = width,
         h = 1.5 * width;
+    canvas.width = w;
+    canvas.height = h;
+
+    const ctx = canvas.getContext("2d");
+    ctx.strokeStyle = "#FFFFFF";
 
     /**
      * @type
