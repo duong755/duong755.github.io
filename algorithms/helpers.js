@@ -106,3 +106,23 @@ function signedArea(triangle) {
 
     return 0.5 * (AB[0] * AC[1] - AB[1] * AC[0]);
 }
+
+/**
+ * 
+ * @param  {...[Point2D, number]} args 
+ */
+function barycenter(...args) {
+    console.assert(args.length > 0);
+
+    const [sumX, sumY, sumWeight] = args.reduce(function (acc, element) {
+        const [x, y, w] = acc;
+        const [point, weight] = element;
+        return [
+            x + point[0] * weight,
+            y + point[1] * weight,
+            w + weight
+        ]
+    }, [0, 0, 0])
+
+    return [sumX / sumWeight, sumY / sumWeight];
+}
