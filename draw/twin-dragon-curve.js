@@ -1,3 +1,5 @@
+import { drawDragonCurve } from "../algorithms/dragon.js";
+
 function draw() {
     /**
      * @type {HTMLCanvasElement}

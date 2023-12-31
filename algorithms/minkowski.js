@@ -1,28 +1,20 @@
-/**
- * @typedef {[Point2D, Point2D, Point2D, Point2D]} Viereck
- */
+import { rotate, signedArea } from "./helpers.js";
 
 /**
  *
- * @param {Point2D} start
- * @param {Point2D} end
- * @returns {Point2D[]}
+ * @param {import("./helpers.js").Point2D} start
+ * @param {import("./helpers.js").Point2D} end
+ * @returns {import("./helpers.js").Point2D[]}
  */
-function simpleMinkowski(start, end) {
+export function simpleMinkowski(start, end) {
     const [x1, y1] = start;
     const [x2, y2] = end;
 
-    /**
-     * @type {Point2D}
-     */
+    /** @type {import("./helpers.js").Point2D} */
     const oneFourth = [x1 + (x2 - x1) / 4, y1 + (y2 - y1) / 4];
-    /**
-     * @type {Point2D}
-     */
+    /** @type {import("./helpers.js").Point2D} */
     const half = [x1 + (x2 - x1) / 2, y1 + (y2 - y1) / 2];
-    /**
-     * @type {Point2D}
-     */
+    /** @type {import("./helpers.js").Point2D} */
     const threeFourth = [x1 + ((x2 - x1) * 3) / 4, y1 + ((y2 - y1) * 3) / 4];
 
     const points = [
@@ -42,16 +34,16 @@ function simpleMinkowski(start, end) {
 
 /**
  *
- * @param {Point2D} start
- * @param {Point2D} end
+ * @param {import("./helpers.js").Point2D} start
+ * @param {import("./helpers.js").Point2D} end
  * @param {number} step
- * @returns {Point2D[]}
+ * @returns {import("./helpers.js").Point2D[]}
  */
-function minkowski(start, end, step) {
+export function minkowski(start, end, step) {
     console.assert(step >= 0);
     /**
      *
-     * @param {Point2D[]} result
+     * @param {import("./helpers.js").Point2D[]} result
      * @param {number} step
      * @returns
      */
@@ -73,11 +65,11 @@ function minkowski(start, end, step) {
 /**
  *
  * @param {CanvasRenderingContext2D} context
- * @param {Point2D} start
- * @param {Point2D} end
+ * @param {import("./helpers.js").Point2D} start
+ * @param {import("./helpers.js").Point2D} end
  * @param {number} step
  */
-function drawMinkowskiWurst(context, start, end, step) {
+export function drawMinkowskiWurst(context, start, end, step) {
     context.beginPath();
     minkowski(start, end, step).forEach((point, index) => {
         if (index === 0) {
@@ -92,10 +84,11 @@ function drawMinkowskiWurst(context, start, end, step) {
 /**
  *
  * @param {CanvasRenderingContext2D} context
- * @param {[Point2D, Point2D, Point2D, Point2D]} viereck
+ * @param {import("./helpers.js").Quadrangle} viereck
  * @param {number} step
+ * @param {string} color
  */
-function drawMinkowskiInsel(context, viereck, step) {
+export function drawMinkowskiInsel(context, viereck, step, color) {
     const [A, B, C, D] = viereck;
     const points =
         signedArea([A, B, C]) > 0
@@ -116,6 +109,8 @@ function drawMinkowskiInsel(context, viereck, step) {
             context.lineTo(...point);
         }
     });
-    context.stroke();
+    context.closePath();
+    context.fillStyle = color;
+    context.fill();
 }
 

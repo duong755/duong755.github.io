@@ -1,3 +1,5 @@
+import { drawMinkowskiInsel } from "../algorithms/minkowski.js";
+
 function draw () {
     /**
      * @type {HTMLCanvasElement}
@@ -22,7 +24,7 @@ function draw () {
                 [3 * w / 4, 3 * h / 4],
                 [w / 4, 3 * h / 4]
             ];
-            drawMinkowskiInsel(ctx, viereck, iteration);
+            drawMinkowskiInsel(ctx, viereck, iteration, "#FFFFFF");
         }, iteration * 1000);
     }
 }

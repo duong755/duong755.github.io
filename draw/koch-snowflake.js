@@ -1,3 +1,5 @@
+import { drawKochSnowflake } from "../algorithms/koch.js";
+
 function draw () {
     /**
      * @type {HTMLCanvasElement}

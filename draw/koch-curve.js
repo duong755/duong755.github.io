@@ -1,3 +1,5 @@
+import { drawKochCurve } from "../algorithms/koch.js";
+
 function draw () {
     /**
      * @type {HTMLCanvasElement}

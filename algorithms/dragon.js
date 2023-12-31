@@ -1,10 +1,12 @@
+import { rotate } from "./helpers.js";
+
 /**
  *
- * @param {Point2D} start
- * @param {Point2D} end
- * @returns {Point2D[]}
+ * @param {import("./helpers.js").Point2D} start
+ * @param {import("./helpers.js").Point2D} end
+ * @returns {import("./helpers.js").Point2D[]}
  */
-function simpleDragon(start, end) {
+export function simpleDragon(start, end) {
     const [x1, y1] = start;
     const [x2, y2] = end;
 
@@ -18,15 +20,15 @@ function simpleDragon(start, end) {
 
 /**
  *
- * @param {Point2D} start
- * @param {Point2D} end
+ * @param {import("./helpers.js").Point2D} start
+ * @param {import("./helpers.js").Point2D} end
  * @param {number} step
- * @returns {Point2D[]}
+ * @returns {import("./helpers.js").Point2D[]}
  */
-function dragonCurve(start, end, step) {
+export function dragonCurve(start, end, step) {
     /**
      *
-     * @param {Point2D[]} result
+     * @param {import("./helpers.js").Point2D[]} result
      * @param {number} step
      * @returns
      */
@@ -53,11 +55,11 @@ function dragonCurve(start, end, step) {
  *
  * @param {CanvasRenderingContext2D} context
  * @param {[number, string][]} colors
- * @param {Point2D} start
- * @param {Point2D} end
+ * @param {import("./helpers.js").Point2D} start
+ * @param {import("./helpers.js").Point2D} end
  * @param {number} step
  */
-function drawDragonCurve(context, colors, start, end, step) {
+export function drawDragonCurve(context, colors, start, end, step) {
     context.beginPath();
     const points = dragonCurve(start, end, step);
     const linearGradient = context.createLinearGradient(

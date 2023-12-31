@@ -1,3 +1,5 @@
+import { drawMinkowskiWurst } from "../algorithms/minkowski.js";
+
 function draw () {
     /**
      * @type {HTMLCanvasElement}

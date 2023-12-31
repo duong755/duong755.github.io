@@ -1,5 +1,7 @@
 /**
  * @typedef {[number, number]} Point2D
+ * @typedef {[Point2D, Point2D, Point2D]} Triangle
+ * @typedef {[Point2D, Point2D, Point2D]} Quadrangle
  */
 
 /**
@@ -8,7 +10,7 @@
  * @param {Point2D} point2
  * @returns {number}
  */
-function distance(point1, point2) {
+export function distance(point1, point2) {
     const [x1, y1] = point1;
     const [x2, y2] = point2;
     return Math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2);
@@ -21,7 +23,7 @@ function distance(point1, point2) {
  * @param {number} angle In radian
  * @returns {Point2D}
  */
-function rotate(center, point, angle) {
+export function rotate(center, point, angle) {
     const radius = distance(center, point);
 
     if (radius === 0) {
@@ -53,7 +55,7 @@ function rotate(center, point, angle) {
  * @param {number} ratio
  * @returns {Point2D}
  */
-function divide(firstPoint, secondPoint, ratio) {
+export function divide(firstPoint, secondPoint, ratio) {
     const t = ratio;
     const [x1, y1] = firstPoint;
     const [x2, y2] = secondPoint;
@@ -70,7 +72,7 @@ function divide(firstPoint, secondPoint, ratio) {
  * @param {Point2D} point2
  * @returns {Point2D}
  */
-function vector(point1, point2) {
+export function vector(point1, point2) {
     return [
         point2[0] - point1[0],
         point2[1] - point1[1]
@@ -83,7 +85,7 @@ function vector(point1, point2) {
  * @param {Point2D} vector 
  * @returns {Point2D}
  */
-function translate(point, vector) {
+export function translate(point, vector) {
     return [
         point[0] + vector[0],
         point[1] + vector[1]
@@ -93,10 +95,10 @@ function translate(point, vector) {
 
 /**
  * 
- * @param {[Point2D, Point2D, Point2D]} triangle 
+ * @param {Triangle} triangle 
  * @returns {number}
  */
-function signedArea(triangle) {
+export function signedArea(triangle) {
     const [A, B, C] = triangle;
     /**
      * @type {Point2D}
@@ -111,7 +113,7 @@ function signedArea(triangle) {
  * 
  * @param  {...[Point2D, number]} args 
  */
-function barycenter(...args) {
+export function barycenter(...args) {
     console.assert(args.length > 0);
 
     const [sumX, sumY, sumWeight] = args.reduce(function (acc, element) {

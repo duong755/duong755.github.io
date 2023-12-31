@@ -1,19 +1,21 @@
+import { rotate, signedArea } from "./helpers.js";
+
 /**
  *
- * @param {Point2D} start
- * @param {Point2D} end
- * @returns {[Point2D, Point2D, Point2D, Point2D, Point2D]}
+ * @param {import("./helpers.js").Point2D} start
+ * @param {import("./helpers.js").Point2D} end
+ * @returns {import("./helpers.js").Point2D[]}
  */
-function simpleKoch(start, end) {
+export function simpleKoch(start, end) {
     const [x1, y1] = start;
     const [x2, y2] = end;
 
     /**
-     * @type {Point2D}
+     * @type {import("./helpers.js").Point2D}
      */
     const oneThird = [x1 + (x2 - x1) / 3, y1 + (y2 - y1) / 3];
     /**
-     * @type {Point2D}
+     * @type {import("./helpers.js").Point2D}
      */
     const twoThird = [x1 + ((x2 - x1) * 2) / 3, y1 + ((y2 - y1) * 2) / 3];
 
@@ -30,16 +32,16 @@ function simpleKoch(start, end) {
 
 /**
  *
- * @param {Point2D} start
- * @param {Point2D} end
+ * @param {import("./helpers.js").Point2D} start
+ * @param {import("./helpers.js").Point2D} end
  * @param {number} iteration
  * @returns
  */
-function koch(start, end, iteration) {
+export function koch(start, end, iteration) {
     console.assert(iteration >= 0);
     /**
      *
-     * @param {Point2D[]} result
+     * @param {import("./helpers.js").Point2D[]} result
      * @param {number} step
      * @returns
      */
@@ -62,11 +64,11 @@ function koch(start, end, iteration) {
 /**
  *
  * @param {CanvasRenderingContext2D} context
- * @param {Point2D} start
- * @param {Point2D} end
+ * @param {import("./helpers.js").Point2D} start
+ * @param {import("./helpers.js").Point2D} end
  * @param {number} iteration
  */
-function drawKochCurve(context, start, end, iteration) {
+export function drawKochCurve(context, start, end, iteration) {
     context.beginPath();
     koch(start, end, iteration).forEach((point, index) => {
         if (index === 0) {
@@ -81,10 +83,10 @@ function drawKochCurve(context, start, end, iteration) {
 /**
  *
  * @param {CanvasRenderingContext2D} context
- * @param {[Point2D, Point2D, Point2D]} triangle
+ * @param {import("./helpers.js").Triangle} triangle
  * @param {number} iteration
  */
-function drawKochSnowflake(context, triangle, iteration) {
+export function drawKochSnowflake(context, triangle, iteration) {
     const path = new Path2D();
 
     const points =
@@ -110,10 +112,10 @@ function drawKochSnowflake(context, triangle, iteration) {
 /**
  *
  * @param {CanvasRenderingContext2D} context
- * @param {[Point2D, Point2D, Point2D]} triangle
+ * @param {import("./helpers.js").Triangle} triangle
  * @param {number} iteration
  */
-function drawKochAntisnowflake(context, triangle, iteration) {
+export function drawKochAntisnowflake(context, triangle, iteration) {
     const path = new Path2D();
 
     const points =

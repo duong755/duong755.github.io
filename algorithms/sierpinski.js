@@ -1,11 +1,13 @@
+import { rotate, divide, distance } from "./helpers.js";
+
 /**
  *
- * @param {Point2D} start
- * @param {Point2D} end
+ * @param {import("./helpers.js").Point2D} start
+ * @param {import("./helpers.js").Point2D} end
  * @param {boolean} flip
- * @returns {Point2D[]}
+ * @returns {import("./helpers.js").Point2D[]}
  */
-function simpleSierpinski(start, end, flip = false) {
+export function simpleSierpinski(start, end, flip = false) {
     const otherVertice = rotate(start, end, flip ? -Math.PI / 3 : Math.PI / 3);
 
     return [start, divide(start, otherVertice, 0.5), divide(otherVertice, end, 0.5), end];
@@ -13,16 +15,16 @@ function simpleSierpinski(start, end, flip = false) {
 
 /**
  *
- * @param {Point2D} start
- * @param {Point2D} end
+ * @param {import("./helpers.js").Point2D} start
+ * @param {import("./helpers.js").Point2D} end
  * @param {number} iteration
  */
-function sierpinskiArrowheadCurve(start, end, iteration) {
+export function sierpinskiArrowheadCurve(start, end, iteration) {
     /**
      *
-     * @param {Point2D[]} result
+     * @param {import("./helpers.js").Point2D[]} result
      * @param {number} step
-     * @returns {Point2D[]}
+     * @returns {import("./helpers.js").Point2D[]}
      */
     function recur(result, step) {
         if (step >= iteration) {
@@ -57,15 +59,15 @@ function sierpinskiArrowheadCurve(start, end, iteration) {
 
 /**
  * 
- * @param {[Point2D, Point2D, Point2D]} triangle 
+ * @param {import("./helpers.js").Triangle} triangle 
  * @param {number} iteration 
  */
-function sierpinskiTriangle(triangle, iteration) {
+export function sierpinskiTriangle(triangle, iteration) {
     /**
      * 
-     * @param {[Point2D, Point2D, Point2D][][]} result 
+     * @param {import("./helpers.js").Triangle[][]} result 
      * @param {number} step
-     * @param {[Point2D, Point2D, Point2D][][]} 
+     * @param {import("./helpers.js").Triangle[][]} 
      */
     function recur(result, step) {
         if (step >= iteration) {
@@ -79,11 +81,11 @@ function sierpinskiTriangle(triangle, iteration) {
             const M_BC = divide(B, C, 0.5);
             const M_CA = divide(C, A, 0.5);
 
-            /** @type {[Point2D, Point2D, Point2D]} */
+            /** @type {import("./helpers.js").Triangle} */
             const first = [A, M_AB, M_CA];
-            /** @type {[Point2D, Point2D, Point2D]} */
+            /** @type {import("./helpers.js").Triangle} */
             const second = [M_AB, B, M_BC];
-            /** @type {[Point2D, Point2D, Point2D]} */
+            /** @type {import("./helpers.js").Triangle} */
             const third = [M_CA, M_BC, C];
 
             return [first, second, third];
@@ -97,15 +99,15 @@ function sierpinskiTriangle(triangle, iteration) {
 
 /**
  * 
- * @param {[Point2D, Point2D, Point2D]} triangle 
+ * @param {import("./helpers.js").Triangle} triangle 
  * @param {number} iteration 
  */
-function sierpinskiPedalTriangle(triangle, iteration) {
+export function sierpinskiPedalTriangle(triangle, iteration) {
     /**
      * 
-     * @param {[Point2D, Point2D, Point2D][][]} result 
+     * @param {import("./helpers.js").Triangle[][]} result 
      * @param {number} step
-     * @param {[Point2D, Point2D, Point2D][][]} 
+     * @param {import("./helpers.js").Triangle[][]} 
      */
     function recur(result, step) {
         if (step >= iteration) {
@@ -127,11 +129,11 @@ function sierpinskiPedalTriangle(triangle, iteration) {
             const M_BC = divide(B, C, S_C / BC**2);
             const M_CA = divide(C, A, S_A / CA**2);
 
-            /** @type {[Point2D, Point2D, Point2D]} */
+            /** @type {import("./helpers.js").Triangle} */
             const first = [A, M_AB, M_CA];
-            /** @type {[Point2D, Point2D, Point2D]} */
+            /** @type {import("./helpers.js").Triangle} */
             const second = [M_AB, B, M_BC];
-            /** @type {[Point2D, Point2D, Point2D]} */
+            /** @type {import("./helpers.js").Triangle} */
             const third = [M_CA, M_BC, C];
 
             return [first, second, third];
@@ -147,11 +149,11 @@ function sierpinskiPedalTriangle(triangle, iteration) {
  *
  * @param {CanvasRenderingContext2D} context
  * @param {[number, string][]} colors
- * @param {Point2D} start
- * @param {Point2D} end
+ * @param {import("./helpers.js").Point2D} start
+ * @param {import("./helpers.js").Point2D} end
  * @param {number} step
  */
-function drawSierpinskiArrowheadCurve(context, colors, start, end, step) {
+export function drawSierpinskiArrowheadCurve(context, colors, start, end, step) {
     context.beginPath();
     const points = sierpinskiArrowheadCurve(start, end, step);
     const linearGradient = context.createLinearGradient(
@@ -175,10 +177,10 @@ function drawSierpinskiArrowheadCurve(context, colors, start, end, step) {
 /**
  *
  * @param {CanvasRenderingContext2D} context
- * @param {[Point2D, Point2D, Point2D]} triangle
+ * @param {import("./helpers.js").Triangle} triangle
  * @param {number} step
  */
-function drawSierpinskiTriangle(context, triangle, step) {
+export function drawSierpinskiTriangle(context, triangle, step) {
     const listOfListOfTriangles = sierpinskiTriangle(triangle, step);
     listOfListOfTriangles.forEach(function (listOfTriangles) {
         listOfTriangles.forEach(function (triangle) {
@@ -196,10 +198,10 @@ function drawSierpinskiTriangle(context, triangle, step) {
 /**
  *
  * @param {CanvasRenderingContext2D} context
- * @param {[Point2D, Point2D, Point2D]} triangle
+ * @param {import("./helpers.js").Triangle} triangle
  * @param {number} step
  */
-function drawSierpinskiPedalTriangle(context, triangle, step) {
+export function drawSierpinskiPedalTriangle(context, triangle, step) {
     const listOfListOfTriangles = sierpinskiPedalTriangle(triangle, step);
     listOfListOfTriangles.forEach(function (listOfTriangles) {
         listOfTriangles.forEach(function (triangle) {
