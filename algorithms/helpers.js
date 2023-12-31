@@ -128,3 +128,22 @@ export function barycenter(...args) {
 
     return [sumX / sumWeight, sumY / sumWeight];
 }
+
+/**
+ * 
+ * @param  {...Point2D} points 
+ * @returns {Point2D}
+ */
+export function centroid(...points) {
+    console.assert(points.length > 0);
+
+    const [sumX, sumY] = points.reduce(function (acc, element) {
+        const [x, y] = acc;
+        return [
+            x + element[0],
+            y + element[1]
+        ];
+    }, [0, 0]);
+
+    return [sumX / points.length, sumY / points.length];
+}
