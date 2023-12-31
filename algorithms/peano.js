@@ -54,9 +54,26 @@ export function peanoCurve(quadrangle, iteration) {
  */
 export function drawPeanoCurve(context, colors, quadrangle, iteration) {
     const quadrangles = peanoCurve(quadrangle, iteration);
+
+    quadrangles.forEach((quadrangleElement) => {
+        const [A, B, C, D] = quadrangleElement;
+        context.beginPath();
+        context.setLineDash([4, 12]);
+        context.strokeStyle = "#FFFFFF";
+        context.lineDashOffset = 4;
+        context.lineWidth = 1;
+        context.moveTo(...A);
+        context.lineTo(...B);
+        context.lineTo(...C);
+        context.lineTo(...D);
+        context.closePath();
+        context.stroke();
+    });
+
     const centroids = quadrangles.map((element) => centroid(...element));
 
     context.beginPath();
+    context.setLineDash([]);
     const linearGradient = context.createLinearGradient(centroids[0][0], centroids[0][1], centroids[centroids.length - 1][0], centroids[centroids.length - 1][1]);
     colors.forEach(([key, val]) => linearGradient.addColorStop(key, val));
     centroids.forEach((point, index) => {
@@ -66,6 +83,7 @@ export function drawPeanoCurve(context, colors, quadrangle, iteration) {
             context.lineTo(...point);
         }
     });
+    context.lineWidth = 2;
     context.strokeStyle = linearGradient;
     context.stroke();
 }
