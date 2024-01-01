@@ -1,7 +1,7 @@
 /**
  * @typedef {[number, number]} Point2D
  * @typedef {[Point2D, Point2D, Point2D]} Triangle
- * @typedef {[Point2D, Point2D, Point2D]} Quadrangle
+ * @typedef {[Point2D, Point2D, Point2D, Point2D]} Quadrangle
  */
 
 /**
@@ -100,11 +100,8 @@ export function translate(point, vector) {
  */
 export function signedArea(triangle) {
     const [A, B, C] = triangle;
-    /**
-     * @type {Point2D}
-     */
-    const AB = [B[0] - A[0], B[1] - A[1]];
-    const AC = [C[0] - A[0], C[1] - A[1]];
+    const AB = vector(A, B);
+    const AC = vector(A, C);
 
     return 0.5 * (AB[0] * AC[1] - AB[1] * AC[0]);
 }

@@ -1,3 +1,4 @@
+import { makeLinearGradient } from "../draw/helpers.js";
 import { barycenter, centroid } from "./helpers.js";
 
 /**
@@ -74,16 +75,14 @@ export function drawPeanoCurve(context, colors, quadrangle, iteration) {
 
     context.beginPath();
     context.setLineDash([]);
-    const linearGradient = context.createLinearGradient(centroids[0][0], centroids[0][1], centroids[centroids.length - 1][0], centroids[centroids.length - 1][1]);
-    colors.forEach(([key, val]) => linearGradient.addColorStop(key, val));
-    centroids.forEach((point, index) => {
+    makeLinearGradient(context, colors, centroids[0], centroids[centroids.length - 1]);
+    centroids.forEach(function (point, index) {
         if (index === 0) {
-            context.moveTo(...point);
+            context.moveTo.apply(context, point);
         } else {
-            context.lineTo(...point);
+            context.lineTo.apply(context, point);
         }
     });
     context.lineWidth = 2;
-    context.strokeStyle = linearGradient;
     context.stroke();
 }

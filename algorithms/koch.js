@@ -1,3 +1,4 @@
+import { makeLinearGradient } from "../draw/helpers.js";
 import { rotate, signedArea } from "./helpers.js";
 
 /**
@@ -64,12 +65,14 @@ export function koch(start, end, iteration) {
 /**
  *
  * @param {CanvasRenderingContext2D} context
+ * @param {[number, string][]} colors
  * @param {import("./helpers.js").Point2D} start
  * @param {import("./helpers.js").Point2D} end
  * @param {number} iteration
  */
-export function drawKochCurve(context, start, end, iteration) {
+export function drawKochCurve(context, colors, start, end, iteration) {
     context.beginPath();
+    makeLinearGradient(context, colors, start, end);
     koch(start, end, iteration).forEach((point, index) => {
         if (index === 0) {
             context.moveTo(...point);

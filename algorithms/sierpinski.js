@@ -1,3 +1,4 @@
+import { makeLinearGradient } from "../draw/helpers.js";
 import { rotate, divide, distance } from "./helpers.js";
 
 /**
@@ -156,13 +157,7 @@ export function sierpinskiPedalTriangle(triangle, iteration) {
 export function drawSierpinskiArrowheadCurve(context, colors, start, end, step) {
     context.beginPath();
     const points = sierpinskiArrowheadCurve(start, end, step);
-    const linearGradient = context.createLinearGradient(
-        points[0][0],
-        points[0][1],
-        points[points.length - 1][0],
-        points[points.length - 1][1]
-    );
-    colors.forEach(([key, val]) => linearGradient.addColorStop(key, val));
+    makeLinearGradient(context, colors, points[0], points[points.length - 1]);
     points.forEach(function (point, index) {
         if (index === 0) {
             context.moveTo(...point);
@@ -170,7 +165,6 @@ export function drawSierpinskiArrowheadCurve(context, colors, start, end, step) 
             context.lineTo(...point);
         }
     });
-    context.strokeStyle = linearGradient;
     context.stroke();
 }
 

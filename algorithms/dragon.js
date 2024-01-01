@@ -1,3 +1,4 @@
+import { makeLinearGradient } from "../draw/helpers.js";
 import { rotate } from "./helpers.js";
 
 /**
@@ -62,13 +63,7 @@ export function dragonCurve(start, end, step) {
 export function drawDragonCurve(context, colors, start, end, step) {
     context.beginPath();
     const points = dragonCurve(start, end, step);
-    const linearGradient = context.createLinearGradient(
-        points[0][0],
-        points[0][1],
-        points[points.length - 1][0],
-        points[points.length - 1][1]
-    );
-    colors.forEach(([key, val]) => linearGradient.addColorStop(key, val));
+    makeLinearGradient(context, colors, start, end);
 
     points.forEach((point, index) => {
         if (index === 0) {
@@ -77,6 +72,5 @@ export function drawDragonCurve(context, colors, start, end, step) {
             context.lineTo(...point);
         }
     });
-    context.strokeStyle = linearGradient;
     context.stroke();
 }
