@@ -15,7 +15,7 @@ function draw() {
     ctx.lineWidth = 2;
     ctx.strokeStyle = "#FFFFFF";
 
-    for (let iteration = 0; iteration <= 5; iteration++) {
+    for (let iteration = 0; iteration <= 6; iteration++) {
         setTimeout(function () {
             ctx.clearRect(0, 0, w, h);
             drawPeanoSierpinskiCurve(ctx, [[0, 0], [w, 0], [w, h], [0, h]], iteration);

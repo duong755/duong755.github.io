@@ -1,4 +1,3 @@
-import { partition } from "../functions/collection.js";
 import { centroid } from "./helpers.js";
 import { simplePeano } from "./peano.js";
 
@@ -43,16 +42,17 @@ export function peanoSierpinskiCurve(quadrangle, iteration) {
 export function drawPeanoSierpinskiCurve(context, quadrangle, iteration) {
     const quadrangles = peanoSierpinskiCurve(quadrangle, iteration);
     const centroids = quadrangles.map(function (quadrangle) {
-        return centroid.apply(undefined, quadrangle);
+        return centroid(...quadrangle);
     });
-    const groupsOfFour = partition(centroids, 4);
 
-    groupsOfFour.forEach(function (fourPoints) {
-        context.beginPath();
-        context.moveTo.apply(context, fourPoints[0]);
-        context.lineTo.apply(context, fourPoints[1]);
-        context.lineTo.apply(context, fourPoints[2]);
-        context.lineTo.apply(context, fourPoints[3]);
-        context.stroke();
+    centroids.forEach(function (_, index) {
+        if (index % 4 === 0 && iteration > 0) {
+            context.beginPath();
+            context.moveTo(...centroids[index + 0]);
+            context.lineTo(...centroids[index + 1]);
+            context.lineTo(...centroids[index + 2]);
+            context.lineTo(...centroids[index + 3]);
+            context.stroke();
+        }
     });
 }

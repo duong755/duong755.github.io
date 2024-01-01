@@ -78,9 +78,9 @@ export function drawPeanoCurve(context, colors, quadrangle, iteration) {
     makeLinearGradient(context, colors, centroids[0], centroids[centroids.length - 1]);
     centroids.forEach(function (point, index) {
         if (index === 0) {
-            context.moveTo.apply(context, point);
+            context.moveTo(...point);
         } else {
-            context.lineTo.apply(context, point);
+            context.lineTo(...point);
         }
     });
     context.lineWidth = 2;
