@@ -14,23 +14,20 @@ function draw() {
     const ctx = canvas.getContext("2d");
     const a = w / 4;
 
-    for (let iteration = 0; iteration <= 15; iteration++) {
+    for (let iteration = 0; iteration <= 16; iteration++) {
         setTimeout(() => {
-            for (let i = 0; i < 5; i++) {
+            for (let i = 0; i < 6; i++) {
                 const y = i * a;
-                drawDragonCurve(ctx, [[0, "yellowgreen"]], [0, y], [-a, y], iteration);
-                drawDragonCurve(ctx, [[0, "olive"]], [a, y], [0, y], iteration);
-                drawDragonCurve(ctx, [[0, "yellowgreen"]], [2 * a, y], [a, y], iteration);
-                drawDragonCurve(ctx, [[0, "olive"]], [3 * a, y], [2 * a, y], iteration);
-                drawDragonCurve(ctx, [[0, "yellowgreen"]], [4 * a, y], [3 * a, y], iteration);
-                drawDragonCurve(ctx, [[0, "olive"]], [5 * a, y], [4 * a, y], iteration);
-        
-                drawDragonCurve(ctx, [[0, "dodgerblue"]], [-a, y], [0, y], iteration);
-                drawDragonCurve(ctx, [[0, "navy"]], [0, y], [a, y], iteration);
-                drawDragonCurve(ctx, [[0, "dodgerblue"]], [a, y], [2 * a, y], iteration);
-                drawDragonCurve(ctx, [[0, "navy"]], [2 * a, y], [3 * a, y], iteration);
-                drawDragonCurve(ctx, [[0, "dodgerblue"]], [3 * a, y], [4 * a, y], iteration);
-                drawDragonCurve(ctx, [[0, "navy"]], [4 * a, y], [5 * a, y], iteration);
+                for (let j = 0; j < 6; j++) {
+                    const forwardColor = j % 2 === 0 ?
+                        [[0, "gold"], [1 / 3, "goldenrod"], [2 / 3, "orange"], [1, "red"]] :
+                        [[0, "lightgreen"], [1 / 3, "lightseagreen"], [2 / 3, "mediumseagreen"], [1, "green"]];
+                    const reverseColor = j % 2 === 0 ?
+                        [[0, "white"], [1 / 3, "lightskyblue"], [2 / 3, "dodgerblue"], [1, "deepskyblue"]] :
+                        [[0, "blue"], [1 / 3, "mediumblue"], [2 / 3, "darkblue"], [1, "navy"]];
+                    drawDragonCurve(ctx, forwardColor, [j * a, y], [(j - 1) * a, y], iteration);
+                    drawDragonCurve(ctx, reverseColor, [(j - 1) * a, y], [j * a, y], iteration);
+                }
             }
         }, iteration * 1000);
     }
