@@ -1,5 +1,6 @@
 /**
  * @typedef {[number, number]} Point2D
+ * @typedef {[Point2D, Point2D]} LineSegment
  * @typedef {[Point2D, Point2D, Point2D]} Triangle
  * @typedef {[Point2D, Point2D, Point2D, Point2D]} Quadrangle
  */
@@ -21,9 +22,10 @@ export function distance(point1, point2) {
  * @param {Point2D} center
  * @param {Point2D} point
  * @param {number} angle In radian
+ * @param {number} scale
  * @returns {Point2D}
  */
-export function rotate(center, point, angle) {
+export function rotate(center, point, angle, scale = 1.0) {
     const radius = distance(center, point);
 
     if (radius === 0) {
@@ -39,11 +41,11 @@ export function rotate(center, point, angle) {
      */
     const image = [
         center[0] +
-        (point[0] - center[0]) * cosAngle -
-        (point[1] - center[1]) * sinAngle,
+        (point[0] - center[0]) * scale * cosAngle -
+        (point[1] - center[1]) * scale * sinAngle,
         center[1] +
-        (point[0] - center[0]) * sinAngle +
-        (point[1] - center[1]) * cosAngle,
+        (point[0] - center[0]) * scale * sinAngle +
+        (point[1] - center[1]) * scale * cosAngle,
     ];
     return image;
 }
